@@ -1,12 +1,12 @@
 Es un estilo de arquitectura diseñado para construir una API.
 
-Carateristicas de un estilo de arquitectura REST.
+Características de un estilo de arquitectura REST.
 
   - Se manejan recursos mediante peticiones HTTP/HTTPS.
 
 Como se costruyen las URL o endpoints?
 
-  - Estrucutra /recurso/{identificador}/subrecursos 
+  - Estructura /recurso/{identificador}/subrecursos 
 
 Ejemplos : 
 
@@ -14,22 +14,28 @@ https://api.ejemplo.com/libros/1 → Recurso "libros", obteniendo el libro con I
 
 https://api.ejemplo.com/usuarios/42/pedidos → Pedidos del usuario con ID 42.
 
-Que es un recurso?
+¿Que es un recurso?
 
   - Una pieza de informacion que se gestiona a traves de los endpoints.
 
 Reglas de la Arquitectura REST
 
   - Interfaz uniforme: Reglas para acceder a los recursos, REST se basa en estándares como JSON (actualmente casi todo es JSON) o XML para representar los datos y que la estructura de las respuestas y peticiones debe ser coherente.
-  - Sin estado: Cada solicitud a de ser independiente y llevar toda la información necesaria.
-  - Desacoplamiento Ciente-Servidor: El servidor y cliente han de estar separados en la comunicación.
-  - Sistema por Capas: Interacciones a través de capas de sin que los componentes sepan sobre la implementación de los demas.
+  - Sin estado: Cada solicitud ha de ser independiente y llevar toda la información necesaria.
+  - Desacoplamiento Cliente-Servidor: El servidor y cliente han de estar separados en la comunicación.
+  - Sistema por capas: Permite que las interacciones pasen a través de distintas capas sin que los componentes conozcan la implementación de los demás.
   - Almacenamiento en Caché: Recomendación de cachear información del recurso.
 
-Verbos HTTP
-  - GET
-  - POST
-  - DELETE
+VERBOS HTTP
+MÁS UTILIZADOS
+  - GET: Recupera información de un recurso sin modificarlo.
+  - POST: Crea un nuevo recurso en el servidor.
+  - DELETE: Elimina un recurso identificado por una URL.
+
+MENOS USADOS
+  - PUT: Actualiza un recurso existente.
+  - PATCH: Permite hacer modificaciones parciales.
+  - OPTIONS: Permite consultar qué métodos están disponibles en un endpoint.
 
 Como cada solicitud a de tener la misma estructura, los verbos nos permiten definir la accion que hara esa solicitud.
 
