@@ -17,7 +17,9 @@ Express también se instala desde la terminal, ejecutando el siguiente comando
 npm install express
 ```
 ## CRUD
-Para desarrollar la aplicación CRUD, aquí está el código para desarrollar las principales funciones de una aplicación CRUD.
+CRUD es un acrónimo de Create (Crear), Read (Leer), Update (Actualizar) y Delete (Borrar). Sirve para referirse a las operaciones básicas
+para interactuar con los registros persistentes de una aplicación, por lo que cuando nos referimos a una aplicación CRUD, nos referimos a una aplicación que como mínimo cumple con estas 4 funciones.
+Para desarrollar, aquí está el código para desarrollar las principales funciones de una aplicación CRUD.
 ### CREAR
 ```
 app.post('/tasks', (req, res) => {
@@ -78,5 +80,9 @@ app.delete('/tasks/:id', (req, res) => {
 });
 ```
 ## Ejercicio
-Crea una aplicacion basica en la que gestiones una lista de la compra, cada registro debe tener el nombre del producto, su cantidad y un boolean que indica si esta en el carrito o no, a continuacion, muestra en la pagina principal un string por cada registro existente (sin CSS) ejemplo: "Nombre: Pan, Cantidad: 3, En_Carrito: No".
-Ademas de que en la pagina principal, debe haber un boton de crear para añadir un producto a la lista, que rediriga a un formulario basico (sin CSS) que cree el producto y lo añada a la lista y redirigiendo al la pagina principal al terminar el formulario,. Por ultimo añade a cada registro un boton de eliminar para poder borrar el registro, no es necesario añadir las funciones de actualizar ya que es ejercicio de prueba
+Crea una aplicación básica en la que gestiones una lista de la compra, cada registro debe tener el nombre del producto, su cantidad y un boolean que
+indica si está en el carrito o no, a continuación, muestra en la página principal un string por cada registro existente (sin CSS)
+Ejemplo: “Nombre: Pan, Cantidad: 3, En_Carrito: No”.
+Además de que en la página principal, debe haber un botón de crear para añadir un producto a la lista, que redirija a un formulario básico (sin CSS)
+que genere el producto y lo añada a la lista y redirigiendo al la página principal al terminar el formulario. Por último añade a cada registro un
+botón de eliminar para poder borrar el registro, no es necesario añadir las funciones de actualizar, ya que es un ejercicio de prueba.
