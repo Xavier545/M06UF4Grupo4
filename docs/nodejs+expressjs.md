@@ -77,3 +77,6 @@ app.delete('/tasks/:id', (req, res) => {
   }
 });
 ```
+## Ejercicio
+Crea una aplicacion basica en la que gestiones una lista de la compra, cada registro debe tener el nombre del producto, su cantidad y un boolean que indica si esta en el carrito o no, a continuacion, muestra en la pagina principal un string por cada registro existente (sin CSS) ejemplo: "Nombre: Pan, Cantidad: 3, En_Carrito: No".
+Ademas de que en la pagina principal, debe haber un boton de crear para añadir un producto a la lista, que rediriga a un formulario basico (sin CSS) que cree el producto y lo añada a la lista y redirigiendo al la pagina principal al terminar el formulario,. Por ultimo añade a cada registro un boton de eliminar para poder borrar el registro, no es necesario añadir las funciones de actualizar ya que es ejercicio de prueba
