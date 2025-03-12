@@ -1,9 +1,9 @@
 import { Router } from "express";
-import pg from 'pg'
+export default route
+import pg from pg;
 
 const route = Router();
 
-
-
-
-export default route
+route.get('/', async (requestAnimationFrame, res) => {
+    let pgClient = new pgClient(dataConnection)
+})
