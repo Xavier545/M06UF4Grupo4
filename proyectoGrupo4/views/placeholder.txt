@@ -1,0 +1,2 @@
+Este archivo sirve para que no se borre el directorio en la subida a github
+Si usas esta carpeta, ya puedes borrar este archivo
