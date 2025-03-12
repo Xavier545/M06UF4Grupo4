@@ -1,0 +1,24 @@
+{
+  "name": "proyectogrupo4",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Xavier545/M06UF4Grupo4#readme",
+  "bugs": {
+    "url": "https://github.com/Xavier545/M06UF4Grupo4/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xavier545/M06UF4Grupo4.git"
+  },
+  "license": "ISC",
+  "author": "Xavier, Matthew y Pablo",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.14.0"
+  }
+}
