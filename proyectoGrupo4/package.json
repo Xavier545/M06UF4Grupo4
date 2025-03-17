@@ -12,13 +12,14 @@
   },
   "license": "ISC",
   "author": "Xavier, Matthew y Pablo",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.2",
-    "pg": "^8.14.0"
+    "pg": "^8.14.1"
   }
 }
