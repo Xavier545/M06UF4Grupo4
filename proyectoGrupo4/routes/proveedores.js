@@ -1,6 +1,5 @@
 import { Router } from "express";
-import pg from 'pg'
-// import dbConnection from "./../dbconnection.js";
+import pg from 'pg';
 
 const route = Router();
 
@@ -16,13 +15,9 @@ const dbConnection = new pg.Client({
 route.get('/', async (req, res) => {
     let pgClient = new pg.Client(dbConnection);
     await pgClient.connect();
-    let result = await pgClient.query('select * from productos');
+    let result = await pgClient.query('select * from proveedores');
     res.json(result.rows);
     await pgClient.end();
 });
-
-// route.get('/:id', (req, res) => {
-//     res.send(`Detalles del producto ${req.params.id}`);
-// });
 
 export default route
