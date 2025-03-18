@@ -14,6 +14,7 @@ const dbConnection = new pg.Client({
     port: 5432,
     database: 'supermercado',
     ssl: false,
+    connectionTimeoutMillis: 5000,
 });
 
 dbConnection.connect()
