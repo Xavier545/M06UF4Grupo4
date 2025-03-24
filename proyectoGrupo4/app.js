@@ -1,7 +1,7 @@
 import express from 'express'
 import pg from 'pg'
 import cors from 'cors'
-import producto from './routes/productos.js'
+// import producto from './routes/productos.js'
 import proveedor from './routes/proveedores.js'
 
 const app = express()
@@ -27,7 +27,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // Rutas API
-app.use('/productos', producto);
+// app.use('/productos', producto);
 app.use('/proveedores', proveedor);
 
 // Para acceder a la web desde terminal
