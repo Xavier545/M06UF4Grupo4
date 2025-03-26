@@ -1,22 +1,12 @@
-import pg from 'pg'
+import pkg from 'pg';
+const { Pool } = pkg;
 
-export const dbConnection = new pg.Client({
-    user:'postgres',
-    password:'badia123',
-    host:'localhost',
+const dbconnection = new Pool({
+    user: "postgres",
+    host: "localhost",
+    database: "supermercado",
+    password: "badia123",
     port: 5432,
-    database: 'supermercat',
-    ssl: false,
 });
-// dbConnection.connect()
-//     .then(() => console.log('Conexión exitosa a la base de datos'))
-//     .catch(err => console.error('Error de conexión:', err));
 
-export async function dbConnect()  {
-    try {
-        await dbConnection.connect();
-        console.log('Conexion a PostgreSQL exitosa')
-    } catch (error) {
-        console.error('Error al conectar a PostgreSQL:', error)
-    }
-}
+export default dbconnection;
