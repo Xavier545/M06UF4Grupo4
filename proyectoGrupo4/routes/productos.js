@@ -1,23 +1,13 @@
 import express from 'express';
-import pg from 'pg';
-const { Pool } = pg;
+import dbconnection from '../dbconnection.js';
 
 const router = express.Router();
-
-// Configuración de la conexión a la base de datos
-const pool = new Pool({
-    user: 'postgres',
-    password: 'badia123',
-    host: 'localhost',
-    port: 5432,
-    database: 'supermercat'
-});
 
 // Obtener todos los productos
 router.get('/', async (req, res) => {
     try {
         console.log('Intentando obtener productos...');
-        const result = await pool.query('SELECT * FROM productos');
+        const result = await dbconnection.query('SELECT * FROM productos');
         console.log('Resultado de la consulta:', result);
         console.log('Filas obtenidas:', result.rows);
         
@@ -37,7 +27,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await pool.query('SELECT * FROM productos WHERE id = $1', [id]);
+        const result = await dbconnection.query('SELECT * FROM productos WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({ message: 'Producto no encontrado' });
         }
@@ -63,7 +53,7 @@ router.post('/', async (req, res) => {
             stock 
         } = req.body;
         
-        const result = await pool.query(
+        const result = await dbconnection.query(
             `INSERT INTO productos (
                 id_proveedor, codigo, imagen, nombre, marca, 
                 tipo, grupo, peso, precio_unidad, stock
@@ -93,7 +83,7 @@ router.put('/:id', async (req, res) => {
             stock 
         } = req.body;
 
-        const result = await pool.query(
+        const result = await dbconnection.query(
             `UPDATE productos SET 
                 id_proveedor = $1, 
                 codigo = $2, 
@@ -122,7 +112,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await pool.query('DELETE FROM productos WHERE id = $1 RETURNING *', [id]);
+        const result = await dbconnection.query('DELETE FROM productos WHERE id = $1 RETURNING *', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({ message: 'Producto no encontrado' });
         }
