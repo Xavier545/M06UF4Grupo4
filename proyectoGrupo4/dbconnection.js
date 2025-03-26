@@ -2,10 +2,10 @@ import pg from 'pg'
 
 export const dbConnection = new pg.Client({
     user:'postgres',
-    password:'Badia123',
+    password:'badia123',
     host:'localhost',
     port: 5432,
-    database: 'supermercado',
+    database: 'supermercat',
     ssl: false,
 });
 // dbConnection.connect()
