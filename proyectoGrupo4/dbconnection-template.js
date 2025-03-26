@@ -1,7 +1,7 @@
 const dbconnection = new Pool({
-    user: "tu_usuario",
+    user: "postgres",
     host: "localhost",
-    database: "tu_base_de_datos",
-    password: "tu_contraseña",
+    database: "supermercado",
+    password: "badia123",
     port: 5432,
 });
