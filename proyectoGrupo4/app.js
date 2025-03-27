@@ -1,27 +1,44 @@
 import express from 'express'
-import pg from 'pg'
 import cors from 'cors'
-import producto from './routes/productos'
+import dbconnection from './dbconnection.js'
+import producto from './routes/productos.js'
+import proveedor from './routes/proveedores.js'
 
 const app = express()
+const PORT = process.env.PORT || 3000
 
-app.use('/productos', producto)
+// Configuracion de Middleware
+app.use(cors())
+app.use(express.static('public'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const PORT = process.env.PORT || 3000;
+// Conexión a la base de datos
+dbconnection.connect()
+    .then(() => console.log('Conexión a PostgreSQL exitosa'))
+    .catch(err => console.error('Error al conectar a PostgreSQL:', err));
 
-// Middleware
-app.use(express.json()); // Permite recibir JSON en las peticiones
-app.use(cors()); // Habilita CORS
+// Rutas API
+app.use('/api/productos', producto)
+app.use('/proveedores', proveedor)
 
-// Ruta de prueba
+// Ruta principal redirige a productos/index.html
 app.get('/', (req, res) => {
-    res.json({ message: 'Servidor funcionando! 🚀' });
-});
+    res.redirect('/productos')
+})
+
+// Ruta para la sección de productos
+app.get('/productos', (req, res) => {
+    res.redirect('/productos/index.html')
+})
+
+// Manejo de errores
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).json({ error: 'Algo salió mal!' })
+})
 
 // Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+    console.log(`Servidor corriendo en http://localhost:${PORT}`)
+})
