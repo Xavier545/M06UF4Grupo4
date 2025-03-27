@@ -20,7 +20,7 @@ dbconnection.connect()
 
 // Rutas API
 app.use('/api/productos', producto)
-app.use('/proveedores', proveedor)
+app.use('/api/proveedores', proveedor)
 
 // Ruta principal redirige a productos/index.html
 app.get('/', (req, res) => {
@@ -30,6 +30,11 @@ app.get('/', (req, res) => {
 // Ruta para la sección de productos
 app.get('/productos', (req, res) => {
     res.redirect('/productos/index.html')
+})
+
+// Ruta para la sección de proveedores
+app.get('/proveedores', (req, res) => {
+    res.redirect('/provedores/index.html')
 })
 
 // Manejo de errores
