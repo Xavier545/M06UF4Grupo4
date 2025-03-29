@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Producto</title>
+    <title>Nuevo Cliente</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
         .preview-image {
@@ -17,14 +17,14 @@
     <div class="container mt-4">
         <div class="card shadow">
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h1 class="h3 mb-0">Nuevo Producto</h1>
-                <a href="/productos" class="btn btn-light">
+                <h1 class="h3 mb-0">Nuevo Cliente</h1>
+                <a href="/clientes" class="btn btn-light">
                     <i class="bi bi-arrow-left"></i> Volver
                 </a>
             </div>
             
             <div class="card-body">
-                <form id="productoForm" class="needs-validation" novalidate>
+                <form id="clienteForm" class="needs-validation" novalidate>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="mb-3">
@@ -108,9 +108,9 @@
 
                     <div class="mt-4">
                         <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i> Guardar Producto
+                            <i class="bi bi-save"></i> Guardar Cliente
                         </button>
-                        <a href="/productos" class="btn btn-secondary">
+                        <a href="/clientes" class="btn btn-secondary">
                             <i class="bi bi-x"></i> Cancelar
                         </a>
                     </div>
@@ -137,7 +137,7 @@
         });
 
         // Validación y envío del formulario
-        const form = document.getElementById('productoForm');
+        const form = document.getElementById('clienteForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -148,33 +148,33 @@
             }
 
             const formData = new FormData(form);
-            const producto = Object.fromEntries(formData);
+            const cliente = Object.fromEntries(formData);
 
             // Convertir campos numéricos
-            producto.peso = parseFloat(producto.peso);
-            producto.precio_unidad = parseFloat(producto.precio_unidad);
-            producto.stock = parseInt(producto.stock);
-            producto.id_proveedor = 1; // Valor por defecto
+            cliente.peso = parseFloat(cliente.peso);
+            cliente.precio_unidad = parseFloat(cliente.precio_unidad);
+            cliente.stock = parseInt(cliente.stock);
+            cliente.id_proveedor = 1; // Valor por defecto
 
             try {
-                const response = await fetch('/api/productos', {
+                const response = await fetch('/api/clientes', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(producto)
+                    body: JSON.stringify(cliente)
                 });
 
                 if (!response.ok) {
                     const error = await response.json();
-                    throw new Error(error.error || 'Error al crear el producto');
+                    throw new Error(error.error || 'Error al crear el cliente');
                 }
 
-                alert('Producto creado exitosamente');
-                window.location.href = '/productos';
+                alert('Cliente creado exitosamente');
+                window.location.href = '/clientes';
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error al crear el producto: ' + error.message);
+                alert('Error al crear el cliente: ' + error.message);
             }
         });
     </script>

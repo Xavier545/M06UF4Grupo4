@@ -3,6 +3,7 @@ import cors from 'cors'
 import dbconnection from './dbconnection.js'
 import producto from './routes/productos.js'
 import proveedor from './routes/proveedores.js'
+import cliente from './routes/clientes.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -21,15 +22,21 @@ dbconnection.connect()
 // Rutas API
 app.use('/api/productos', producto)
 app.use('/proveedores', proveedor)
+app.use('/api/clientes', cliente)
 
-// Ruta principal redirige a productos/index.html
+// Ruta principal redirige a clientes/index.html
 app.get('/', (req, res) => {
-    res.redirect('/productos')
+    res.redirect('/clientes')
 })
 
 // Ruta para la sección de productos
 app.get('/productos', (req, res) => {
     res.redirect('/productos/index.html')
+})
+
+// Ruta para la sección de clientes
+app.get('/clientes', (req, res) => {
+    res.redirect('/clientes/index.html')
 })
 
 // Manejo de errores

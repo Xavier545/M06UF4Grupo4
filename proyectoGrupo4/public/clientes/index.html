@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Productos</title>
+    <title>Lista de Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -29,7 +29,7 @@
     <div class="container mt-4">
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
-                <h1 class="h3 mb-0">Lista de Productos</h1>
+                <h1 class="h3 mb-0">Lista de Clientes</h1>
             </div>
             
             <div class="card-body">
@@ -38,27 +38,24 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
-                                <th>Imagen</th>
-                                <th>Código</th>
                                 <th>Nombre</th>
-                                <th>Marca</th>
-                                <th>Tipo</th>
-                                <th>Grupo</th>
-                                <th>Peso</th>
-                                <th>Precio</th>
-                                <th>Stock</th>
-                                <th>Acciones</th>
+                                <th>Apellido</th>
+                                <th>Tipo Doc</th>
+                                <th>DNI</th>
+                                <th>Telefono</th>
+                                <th>Telefono Secundario</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
-                        <tbody id="productosTabla">
-                            <!-- Los productos se cargarán aquí dinámicamente -->
+                        <tbody id="clientesTabla">
+                            <!-- Los clientes se cargarán aquí dinámicamente -->
                         </tbody>
                     </table>
                 </div>
 
                 <div class="mt-3">
-                    <a href="/productos/nuevo.html" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Nuevo Producto
+                    <a href="./form.html" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Nuevo Cliente
                     </a>
                 </div>
             </div>
@@ -70,7 +67,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editarModalLabel">Editar Producto</h5>
+                    <h5 class="modal-title" id="editarModalLabel">Editar Cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -177,44 +174,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let editarModal;
-        let productoActual = null;
+        let clienteActual = null;
 
         // Inicializar el modal cuando el documento esté listo
         document.addEventListener('DOMContentLoaded', () => {
             editarModal = new bootstrap.Modal(document.getElementById('editarModal'));
-            cargarProductos();
+            cargarClientes();
         });
 
-        // Función para cargar los productos
-        async function cargarProductos() {
+        // Función para cargar los clientes
+        async function cargarClientes() {
             try {
-                console.log('Iniciando carga de productos...');
-                const response = await fetch('/api/productos');
+                console.log('Iniciando carga de clientes...');
+                const response = await fetch('/api/clientes');
                 console.log('Respuesta recibida:', response);
                 
                 if (!response.ok) {
                     const error = await response.json();
                     console.error('Error en la respuesta:', error);
-                    throw new Error(error.error || 'Error al cargar productos');
+                    throw new Error(error.error || 'Error al cargar clientes');
                 }
                 
-                const productos = await response.json();
-                console.log('Productos recibidos:', productos);
+                const clientes = await response.json();
+                console.log('Clientes recibidos:', clientes);
 
-                if (!Array.isArray(productos)) {
-                    console.error('La respuesta no es un array:', productos);
+                if (!Array.isArray(clientes)) {
+                    console.error('La respuesta no es un array:', clientes);
                     throw new Error('Formato de respuesta inválido');
                 }
 
-                const tabla = document.getElementById('productosTabla');
+                const tabla = document.getElementById('clientesTabla');
                 
-                if (productos.length === 0) {
+                if (clientes.length === 0) {
                     tabla.innerHTML = `
                         <tr>
                             <td colspan="11" class="text-center text-muted">
                                 <div class="py-4">
                                     <i class="bi bi-inbox fs-1"></i>
-                                    <p class="mt-2">No hay productos disponibles</p>
+                                    <p class="mt-2">No hay clientes disponibles</p>
                                 </div>
                             </td>
                         </tr>
@@ -222,34 +219,34 @@
                     return;
                 }
 
-                tabla.innerHTML = productos.map(producto => {
-                    console.log('Procesando producto:', producto);
+                tabla.innerHTML = clientes.map(cliente => {
+                    console.log('Procesando cliente:', cliente);
                     return `
                         <tr>
-                            <td>${producto.id}</td>
+                            <td>${cliente.id}</td>
                             <td>
-                                ${producto.imagen 
-                                    ? `<img src="${producto.imagen}" alt="${producto.nombre}" class="table-image rounded">` 
+                                ${cliente.imagen 
+                                    ? `<img src="${cliente.imagen}" alt="${cliente.nombre}" class="table-image rounded">` 
                                     : '<span class="badge bg-secondary">Sin imagen</span>'}
                             </td>
-                            <td>${producto.codigo || ''}</td>
-                            <td>${producto.nombre || ''}</td>
-                            <td>${producto.marca || ''}</td>
-                            <td>${producto.tipo || ''}</td>
-                            <td>${producto.grupo || ''}</td>
-                            <td>${producto.peso ? `${producto.peso} kg` : ''}</td>
-                            <td>${producto.precio_unidad ? `€${Number(producto.precio_unidad).toFixed(2)}` : ''}</td>
+                            <td>${cliente.codigo || ''}</td>
+                            <td>${cliente.nombre || ''}</td>
+                            <td>${cliente.marca || ''}</td>
+                            <td>${cliente.tipo || ''}</td>
+                            <td>${cliente.grupo || ''}</td>
+                            <td>${cliente.peso ? `${cliente.peso} kg` : ''}</td>
+                            <td>${cliente.precio_unidad ? `€${Number(cliente.precio_unidad).toFixed(2)}` : ''}</td>
                             <td>
-                                <span class="badge ${producto.stock > 10 ? 'bg-success' : 'bg-warning'}">
-                                    ${producto.stock || 0}
+                                <span class="badge ${cliente.stock > 10 ? 'bg-success' : 'bg-warning'}">
+                                    ${cliente.stock || 0}
                                 </span>
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button onclick="editarProducto(${producto.id})" class="btn btn-warning btn-sm">
+                                    <button onclick="editarCliente(${cliente.id})" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil"></i> Editar
                                     </button>
-                                    <button onclick="eliminarProducto(${producto.id})" class="btn btn-danger btn-sm">
+                                    <button onclick="eliminarCliente(${cliente.id})" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i> Eliminar
                                     </button>
                                 </div>
@@ -258,14 +255,14 @@
                     `;
                 }).join('');
             } catch (error) {
-                console.error('Error al cargar productos:', error);
-                const tabla = document.getElementById('productosTabla');
+                console.error('Error al cargar clientes:', error);
+                const tabla = document.getElementById('clientesTabla');
                 tabla.innerHTML = `
                     <tr>
                         <td colspan="11" class="text-center text-danger">
                             <div class="py-4">
                                 <i class="bi bi-exclamation-triangle fs-1"></i>
-                                <p class="mt-2">Error al cargar los productos: ${error.message}</p>
+                                <p class="mt-2">Error al cargar los clientes: ${error.message}</p>
                             </div>
                         </td>
                     </tr>
@@ -273,52 +270,52 @@
             }
         }
 
-        // Función para eliminar un producto
-        async function eliminarProducto(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+        // Función para eliminar un cliente
+        async function eliminarCliente(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
                 try {
-                    const response = await fetch(`/api/productos/${id}`, {
+                    const response = await fetch(`/api/clientes/${id}`, {
                         method: 'DELETE'
                     });
                     if (response.ok) {
-                        cargarProductos(); // Recargar la tabla
+                        cargarClientes(); // Recargar la tabla
                     } else {
-                        alert('Error al eliminar el producto');
+                        alert('Error al eliminar el cliente');
                     }
                 } catch (error) {
                     console.error('Error:', error);
-                    alert('Error al eliminar el producto');
+                    alert('Error al eliminar el cliente');
                 }
             }
         }
 
-        // Función para editar un producto
-        async function editarProducto(id) {
+        // Función para editar un cliente
+        async function editarCliente(id) {
             try {
-                const response = await fetch(`/api/productos/${id}`);
+                const response = await fetch(`/api/clientes/${id}`);
                 if (!response.ok) {
-                    throw new Error('Error al cargar el producto');
+                    throw new Error('Error al cargar el cliente');
                 }
-                productoActual = await response.json();
+                clienteActual = await response.json();
                 
-                // Llenar el formulario con los datos del producto
-                document.getElementById('editId').value = productoActual.id;
-                document.getElementById('editCodigo').value = productoActual.codigo;
-                document.getElementById('editNombre').value = productoActual.nombre;
-                document.getElementById('editMarca').value = productoActual.marca;
-                document.getElementById('editTipo').value = productoActual.tipo;
-                document.getElementById('editGrupo').value = productoActual.grupo;
-                document.getElementById('editPeso').value = productoActual.peso;
-                document.getElementById('editPrecio').value = productoActual.precio_unidad;
-                document.getElementById('editStock').value = productoActual.stock;
-                document.getElementById('editProveedor').value = productoActual.id_proveedor || 1;
-                document.getElementById('editImagen').value = productoActual.imagen || '';
+                // Llenar el formulario con los datos del cliente
+                document.getElementById('editId').value = clienteActual.id;
+                document.getElementById('editCodigo').value = clienteActual.codigo;
+                document.getElementById('editNombre').value = clienteActual.nombre;
+                document.getElementById('editMarca').value = clienteActual.marca;
+                document.getElementById('editTipo').value = clienteActual.tipo;
+                document.getElementById('editGrupo').value = clienteActual.grupo;
+                document.getElementById('editPeso').value = clienteActual.peso;
+                document.getElementById('editPrecio').value = clienteActual.precio_unidad;
+                document.getElementById('editStock').value = clienteActual.stock;
+                document.getElementById('editProveedor').value = clienteActual.id_proveedor || 1;
+                document.getElementById('editImagen').value = clienteActual.imagen || '';
 
                 // Actualizar vista previa de la imagen
                 const imagenPreview = document.getElementById('editImagenPreview');
                 const previewImg = imagenPreview.querySelector('img');
-                if (productoActual.imagen) {
-                    previewImg.src = productoActual.imagen;
+                if (clienteActual.imagen) {
+                    previewImg.src = clienteActual.imagen;
                     imagenPreview.classList.remove('d-none');
                 } else {
                     imagenPreview.classList.add('d-none');
@@ -328,7 +325,7 @@
                 editarModal.show();
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error al cargar los datos del producto');
+                alert('Error al cargar los datos del cliente');
             }
         }
 
@@ -341,34 +338,34 @@
             }
 
             const formData = new FormData(form);
-            const productoActualizado = Object.fromEntries(formData);
+            const clienteActualizado = Object.fromEntries(formData);
 
             // Convertir campos numéricos
-            productoActualizado.peso = parseFloat(productoActualizado.peso);
-            productoActualizado.precio_unidad = parseFloat(productoActualizado.precio_unidad);
-            productoActualizado.stock = parseInt(productoActualizado.stock);
-            productoActualizado.id_proveedor = parseInt(productoActualizado.id_proveedor) || 1;
+            clienteActualizado.peso = parseFloat(clienteActualizado.peso);
+            clienteActualizado.precio_unidad = parseFloat(clienteActualizado.precio_unidad);
+            clienteActualizado.stock = parseInt(clienteActualizado.stock);
+            clienteActualizado.id_proveedor = parseInt(clienteActualizado.id_proveedor) || 1;
 
             try {
-                const response = await fetch(`/api/productos/${productoActualizado.id}`, {
+                const response = await fetch(`/api/clientes/${clienteActualizado.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(productoActualizado)
+                    body: JSON.stringify(clienteActualizado)
                 });
 
                 if (!response.ok) {
                     const error = await response.json();
-                    throw new Error(error.error || 'Error al actualizar el producto');
+                    throw new Error(error.error || 'Error al actualizar el cliente');
                 }
 
                 editarModal.hide();
-                cargarProductos(); // Recargar la tabla
-                alert('Producto actualizado exitosamente');
+                cargarClientes(); // Recargar la tabla
+                alert('Cliente actualizado exitosamente');
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error al actualizar el producto: ' + error.message);
+                alert('Error al actualizar el cliente: ' + error.message);
             }
         }
 
