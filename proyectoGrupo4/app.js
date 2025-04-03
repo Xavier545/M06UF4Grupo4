@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000
 
 // Configuracion de Middleware
 app.use(cors())
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

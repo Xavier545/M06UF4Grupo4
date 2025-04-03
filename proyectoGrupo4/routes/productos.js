@@ -6,10 +6,10 @@ const router = express.Router();
 // Obtener todos los productos
 router.get('/', async (req, res) => {
     try {
-        console.log('Intentando obtener productos...');
+        // console.log('Intentando obtener productos...');
         const result = await dbconnection.query('SELECT * FROM productos');
-        console.log('Resultado de la consulta:', result);
-        console.log('Filas obtenidas:', result.rows);
+        // console.log('Resultado de la consulta:', result);
+        // console.log('Filas obtenidas:', result.rows);
         
         // Asegurarse de que siempre devolvemos un array
         const productos = Array.isArray(result.rows) ? result.rows : [];
